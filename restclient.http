@@ -1,0 +1,14 @@
+@devBaseURL = http://localhost:3332
+
+@host = {{devBaseURL}}
+
+@token = Bearer 
+
+### Traveler Login 
+POST {{host}}/api/v1/users/auth/ HTTP/1.1
+content-type: application/json
+
+{
+    "email": "josivan.pereira@wcconect.com.br",
+    "password": "123456@wconnect"
+}

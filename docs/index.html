@@ -1,0 +1,113 @@
+<!doctype html> <!-- Important: must specify -->
+<html>
+  <head>
+    <meta charset="utf-8"> <!-- Important: rapi-doc uses utf8 charecters -->
+    <title>API Docs</title>
+    <link rel="icon" href="./favicon.png" sizes="32x32" />
+    <script type="module" src="rapidoc-min.js"></script>
+    <style>
+        body {
+            background-image: url('./logo.png');
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .logo {
+            height: 40px;
+        }
+        .copyright {
+            font-size: 80%;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .footer {
+            display: flex;
+            align-items: center;
+        }
+        .footer .logo {
+            margin-right: 24px;
+        }
+        #docs {
+            opacity: 0;
+            transition: opacity 500ms ease-in;
+        }
+        #docs.active {
+            opacity: 1;
+        }
+
+        @media only screen and (min-width: 768px) {
+            .footer {
+                padding: 24px 8px;
+            }
+        }
+        @media only screen and (min-width: 1024px) {
+            .footer {
+                padding: 24px 80px;
+            }
+        }
+    </style>
+  </head>
+  <body>
+    <rapi-doc
+      id="docs"
+      spec-url="./openapi.yml"
+      show-header="false"
+      sort-tags="true"
+      render-style="read"
+      theme="light"
+      schema-description-expanded="true"
+      use-path-in-nav-bar="true"
+      allow-try="false"
+      allow-server-selection="false"
+      allow-authentication="true"
+      primary-color="#0093D8"
+      nav-bg-color="#f3f3f3"
+    >
+        <div slot="nav-logo" class="nav-logo">
+            <img src="./logo.png" class="logo"/>
+        </div>
+
+        <div slot="overview">
+            <p>Esta documentação faz parte da coleção de APIs que compoêm o <em>backend-for-frontend</em> utilizado
+                tanto para os aplicativos quanto para o site.</p>
+            <!-- <p>APIs da coleção:</p>
+            <ul>
+                <li><a href="/customer/api-docs">API de clientes</a></li>
+            </ul> -->
+            <div class="copyright">
+                &copy; 2023 - wconnect.
+                <div><small>Ao acessar essa documentação você concorda que está vetada a divulgação e reprodução do
+                    conteúdo sem prévia autorização.</small></div>
+            </div>
+        </div>
+
+        <div slot="auth">
+            <p>O token de autenticação Bearer pode ser obtido pelo atributo <code>authorization</code></p>
+            <ul>
+                <li>/</li>
+            </ul>
+            <p>A API irá consumir o token enviado seguindo o padrão <a href="https://tools.ietf.org/html/rfc6750" target="_blank">RFC 6750</a>.</p>
+        </div>
+
+        <div slot="footer" class="footer">
+            <img class="logo" src="./logo.png" />
+            <div class="copyright">
+                &copy; 2023 - wconnect.
+                <div><small>Ao acessar essa documentação você concorda que está vetada a divulgação e reprodução do conteúdo sem prévia autorização.</small></div>
+            </div>
+        </div>
+    </rapi-doc>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const rapidocEl = document.getElementById('docs');
+            rapidocEl.addEventListener('spec-loaded', (event) => {
+                rapidocEl.classList.add('active')
+                document.title = 'API Docs - ' + event.detail.info.title + ' (' + event.detail.info.version + ')'
+                console.log(event.detail)
+            })
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,102 @@
+{
+    "env": {
+        "commonjs": true,
+        "node": true,
+        "jest": true,
+        "es6": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "prettier",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12
+    },
+    "plugins": [
+        "prettier"
+    ],
+    "rules": {
+        "global-require": "warn",
+        "semi": [
+            "warn",
+            "never"
+        ],
+        "semi-spacing": [
+            "error"
+        ],
+        "quotes": [
+            "warn",
+            "single"
+        ],
+        "max-len": [
+            "warn",
+            {
+                "code": 142,
+                "tabWidth": 2,
+                "ignoreUrls": true,
+                "ignorePattern": "^import .*"
+            }
+        ],
+        "array-callback-return": "error",
+        "no-unused-vars": [
+            "warn",
+            {
+                "vars": "all",
+                "args": "after-used",
+                "ignoreRestSiblings": false
+            }
+        ],
+        "no-console": [
+            "warn",
+            {
+                "allow": [
+                    "warn",
+                    "error"
+                ]
+            }
+        ],
+        "no-prototype-builtins": [
+            "warn"
+        ],
+        "no-useless-escape": [
+            "warn"
+        ],
+        "no-mixed-spaces-and-tabs": [
+            "warn"
+        ],
+        "no-extra-semi": [
+            "warn"
+        ],
+        "no-trailing-spaces": "error",
+        "consistent-return": "warn",
+        "no-undef": "warn",
+        "require-await": "warn",
+        "prefer-const": "warn",
+        "eol-last": 0,
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 1,
+                "maxEOF": 0
+            }
+        ],
+        "import/prefer-default-export": "off",
+        "handle-callback-err": "error",
+        "@typescript-eslint/ban-types": "off",
+        "no-useless-catch": "off",
+        "@typescript-eslint/no-inferrable-types": "warn",
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/no-namespace": "off",
+        "max-depth": "off",
+        "linebreak-style": [
+            "off",
+            "unix"
+        ],
+        "linebreak-style": [
+            "off",
+            "windows"
+        ]
+    }
+}

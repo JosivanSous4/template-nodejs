@@ -1,0 +1,38 @@
+image: atlassian/default-image:latest
+
+pipelines:
+  branches:
+    developmentt:
+      - step:
+          name: Deploy EC2
+          script:
+            - pipe: "atlassian/ssh-run:0.2.4"
+              variables:
+                SSH_USER: $SSH_USER
+                SERVER: $SERVER
+                PORT: 22
+                SSH_KEY: $SSH_EC2_ADM_TOKEN_API
+                # MODE: script
+                COMMAND: "
+                  cd ~/wconnect/admin-plataform-api;
+                  rm .env;
+                  echo PORT=80 >> .env;
+                  echo URL=http://localhost >> .env;
+                  echo DATABASE_URL=$DATABASE_URL_HOMOLOG >> .env;
+                  echo BCRYPT_SALT=12 >> .env;
+                  echo JWT_EXPIRES_IN=8h >> .env;
+                  echo JWT_SECRET=$JWT_SECRET_HOMOLOG >> .env;
+
+                  echo '######### UPDATE REPO #########';
+                  git pull origin development;
+                  echo '######### STOP CONTAINERS #########';
+                  docker stop organization-application-api;
+                  echo '######### REMOVE CONTAINERS #########';
+                  docker rm organization-application-api;
+                  echo '######### REMOVE IMAGES #########';
+                  docker rmi jspereira/organization-application-api;
+                  echo '######### BUILD IMAGES #########';
+                  docker build -t jspereira/organization-application-api .;
+                  echo '######### UP CONTAINERS #########';
+                  docker run --name organization-application-api -p 8881:8881 -d jspereira/organization-application-api
+                  "
